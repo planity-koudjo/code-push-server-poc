@@ -15,17 +15,17 @@ import * as restTypes from "../script/types/rest-definitions";
 import * as storage from "../script/storage/storage";
 import * as testUtils from "./utils";
 
-import { AzureStorage } from "../script/storage/azure-storage"; //TODO REPLACE S3
+import { AzureStorage } from "../script/storage/azure-storage";
 import { JsonStorage } from "../script/storage/json-storage";
 
 import Permissions = storage.Permissions;
 
-if (!process.env.AZURE_MANAGEMENT_URL) { //TODO REPLACE S3
+if (!process.env.AZURE_MANAGEMENT_URL) {
   // cannot use local JSON storage when running tests against an Azure server
   describe("Management Rest API with JSON Storage", () => managementTests(/*useJsonStorage=*/ true));
 }
 
-if (process.env.TEST_AZURE_STORAGE) { //TODO REPLACE S3
+if (process.env.TEST_AZURE_STORAGE) {
   describe("Management Rest API with Azure Storage", () => managementTests());
 }
 
@@ -52,9 +52,9 @@ function managementTests(useJsonStorage?: boolean): void {
 
     return q<void>(null)
       .then(() => {
-        if (process.env.AZURE_MANAGEMENT_URL) { //TODO REPLACE S3
-          serverUrl = process.env.AZURE_MANAGEMENT_URL; //TODO REPLACE S3
-          storage = useJsonStorage ? new JsonStorage() : new AzureStorage(); //TODO REPLACE S3
+        if (process.env.AZURE_MANAGEMENT_URL) {
+          serverUrl = process.env.AZURE_MANAGEMENT_URL;
+          storage = useJsonStorage ? new JsonStorage() : new AzureStorage();
         } else {
           // use the middleware defined in DefaultServer
           var deferred: q.Deferred<void> = q.defer<void>();

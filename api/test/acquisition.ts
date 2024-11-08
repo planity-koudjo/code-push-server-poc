@@ -13,7 +13,7 @@ import * as storage from "../script/storage/storage";
 import * as redis from "../script/redis-manager";
 import * as utils from "./utils";
 
-import { AzureStorage } from "../script/storage/azure-storage"; //TODO REPLACE S3
+import { AzureStorage } from "../script/storage/azure-storage";
 import { JsonStorage } from "../script/storage/json-storage";
 import { UpdateCheckRequest } from "../script/types/rest-definitions";
 import { SDK_VERSION_HEADER } from "../script/utils/rest-headers";
@@ -32,14 +32,14 @@ describe("Acquisition Rest API", () => {
   var isAzureServer: boolean;
 
   before((): q.Promise<void> => {
-    var useJsonStorage: boolean = !process.env.TEST_AZURE_STORAGE && !process.env.AZURE_ACQUISITION_URL; //TODO REPLACE S3
+    var useJsonStorage: boolean = !process.env.TEST_AZURE_STORAGE && !process.env.AZURE_ACQUISITION_URL;
 
     return q<void>(null)
       .then(() => {
-        if (process.env.AZURE_ACQUISITION_URL) { //TODO REPLACE S3
-          serverUrl = process.env.AZURE_ACQUISITION_URL; //TODO REPLACE S3
+        if (process.env.AZURE_ACQUISITION_URL) {
+          serverUrl = process.env.AZURE_ACQUISITION_URL;
           isAzureServer = true;
-          storageInstance = useJsonStorage ? new JsonStorage() : new AzureStorage(); //TODO REPLACE S3
+          storageInstance = useJsonStorage ? new JsonStorage() : new AzureStorage();
         } else {
           var deferred: q.Deferred<void> = q.defer<void>();
 
